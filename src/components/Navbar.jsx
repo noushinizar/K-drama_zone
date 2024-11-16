@@ -24,7 +24,7 @@ export default function Navbar() {
         </h1>
     </div>
         <div className="flex items-center gap-2" >
-            <button className='bg-pink-600 px-6 py-2 rounded cursor-pointer text-white'>
+            <button className='bg-pink-600 px-6 rounded cursor-pointer text-white sm:px-1 py-2 sm:text-sm '>
              Log In
             </button>
             <Avatar  src="src/assets/logo.png" /> 

@@ -38,11 +38,15 @@ export const fetchDramaWithTrailer = createAsyncThunk(
         const trailerResponse = await axios.get(`https://api.themoviedb.org/3/tv/${dramaId}/videos`, {
             params: { api_key: API_KEY }
         });
-
+        const creditsResponse = await axios.get(`https://api.themoviedb.org/3/tv/${dramaId}/credits`, {
+            params: { api_key: API_KEY }
+        });
         const trailer = trailerResponse.data.results.find(video => video.type === 'Trailer' && video.site === 'YouTube');
         return {
             ...dramaResponse.data,
-            trailerUrl: trailer ? `https://www.youtube.com/watch?v=${trailer.key}` : null
+            trailerUrl: trailer ? `https://www.youtube.com/watch?v=${trailer.key}` : null,
+            cast: creditsResponse.data.cast,
+            crew: creditsResponse.data.crew
         };
     }
 );

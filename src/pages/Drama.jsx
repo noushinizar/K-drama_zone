@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Typography } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
 import bgimg from '/src/assets/bg_image.jpg'
 import { fetchDramas } from "../redux/DramaSlice"; // Update with the correct path
+import DramaDetails from "./DramaDetails";
 
 export function Drama() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { list: dramas, genreFilter, loading } = useSelector((state) => state.dramas);
 
   // Predefined genres list with IDs and names
@@ -27,7 +30,11 @@ export function Drama() {
       dispatch(fetchDramas(genreFilter));
     }
   }, [dispatch, genreFilter]);
-
+  
+  const handleDramaClick = (id) => {
+    navigate(`/drama/${id}`); // Navigate to the drama details page with the drama ID
+  };
+  
   return (
     <div className="p-4 overflow-x-hidden">
       <Typography variant="h4" color="white" className="mb-4">
@@ -41,7 +48,9 @@ export function Drama() {
         ) : dramas.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-7 gap-2">
             {dramas.map((drama) => (
-              <div key={drama.id} className="relative group">
+              <div key={drama.id} 
+              onClick={() => handleDramaClick(drama.id)}
+              className="relative group">
                 <img
                   src={`https://image.tmdb.org/t/p/w400${drama.poster_path}`}
                   alt={drama.name || drama.title}
