@@ -1,5 +1,5 @@
 import { Avatar } from "@material-tailwind/react";
-import menu from '/src/assets/icons8-menu-64.png';
+import menu from "/src/assets/icons8-menu-64.png";
 import React from "react";
 import { DrawerDefault } from "./Drawer";
 import { Drawer } from "@material-tailwind/react";
@@ -37,10 +37,7 @@ export default function Navbar() {
         <button className="bg-pink-600 text-sm text-white px-2 py-1 rounded-md hover:bg-pink-700 sm:text-base">
           Log In
         </button>
-        <Avatar
-          src="src/assets/logo.png"
-          className="h-8 w-8 sm:h-10 sm:w-10"
-        />
+        <Avatar src="src/assets/logo.png" className="h-8 w-8 sm:h-10 sm:w-10" />
       </div>
     </div>
   );

@@ -10,12 +10,12 @@
 //   ListItemSuffix,
 //   Chip,
 // } from "@material-tailwind/react";
- 
+
 // export function DrawerDefault() {
 //   const [open, setOpen] = React.useState(false);
 
 //   const closeDrawer = () => setOpen(false);
- 
+
 //   return (
 //     <>
 //         <div className="mb-2 flex items-center justify-between p-4 ">
@@ -58,7 +58,7 @@
 //            Fantasy
 //           </ListItem>
 //         </List>
-       
+
 //     </>
 //   );
 // }
@@ -156,10 +156,9 @@ export function DrawerDefault() {
     { id: 10765, name: "Sci-Fi & Fantasy" }, // Use this ID for Fantasy if needed
     { id: 10768, name: "War & Politics" }, // Close for "Legal" dramas if available
     { id: 36, name: "Historical" },
-    { id: 10751, name: "Family & Revenge" } // Revenge approximation
+    { id: 10751, name: "Family & Revenge" }, // Revenge approximation
     // Add more genres as needed
   ];
-  
 
   return (
     <div className="p-4">
