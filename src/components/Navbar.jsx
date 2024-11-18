@@ -4,6 +4,7 @@ import React from "react";
 import { DrawerDefault } from "./Drawer";
 import { Drawer } from "@material-tailwind/react";
 import logo from '/src/assets/logo.png'
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [open, setOpen] = React.useState(false);
@@ -26,11 +27,13 @@ export default function Navbar() {
           open={open}
           onClose={closeDrawer}
         >
-          <DrawerDefault />
+          <DrawerDefault closeDrawer={closeDrawer}/>
         </Drawer>
+        <Link to={"/"}>
         <h1 className="text-pink-600 text-xm sm:text-2xl font-bold cursor-pointer">
           K-DRAMA ZONE
         </h1>
+        </Link>
       </div>
 
       {/* Right Section */}
