@@ -4,7 +4,7 @@ import { Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import bgimg from '/src/assets/bg_image.jpg'
 import { fetchDramas } from "../redux/DramaSlice"; // Update with the correct path
-import DramaDetails from "./DramaDetails";
+// import DramaDetails from "./DramaDetails";
 
 export function Drama() {
   const dispatch = useDispatch();
@@ -12,14 +12,16 @@ export function Drama() {
   const { list: dramas, genreFilter, loading } = useSelector((state) => state.dramas);
 
   // Predefined genres list with IDs and names
-  const genres = [
-    { id: 28, name: "Action" },
-    { id: 35, name: "Comedy" },
-    { id: 18, name: "Drama" },
-    { id: 10749, name: "Romance" },
-    { id: 27, name: "Horror" },
-    // Add more genres as needed
-  ];
+ const genres = [
+  { id: 35, name: "Comedy" },
+  { id: 18, name: "Drama" },
+  { id: 10749, name: "Romance" },
+  { id: 80, name: "Crime" },
+  { id: 10765, name: "Sci-Fi & Fantasy" }, // Use this ID for Fantasy if needed
+  { id: 10768, name: "War & Politics" }, // Close for "Legal" dramas if available
+  { id: 36, name: "Historical" },
+  { id: 10751, name: "Family & Revenge" }, // Revenge approximation
+];
 
   // Find the genre name from the genreFilter ID
   const selectedGenre = genres.find((genre) => genre.id === genreFilter)?.name || "Popular";
