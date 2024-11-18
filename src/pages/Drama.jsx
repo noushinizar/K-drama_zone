@@ -40,7 +40,7 @@ export function Drama() {
 
   return (
     <div
-      className="p-4 overflow-x-hidden"
+      className="pl-2 pt-4 overflow-x-hidden h-full"
       style={{ backgroundImage: `url(${bgimg})` }}
     >
       <Typography variant="h4" color="white" className="mb-4">

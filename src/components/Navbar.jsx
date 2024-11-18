@@ -3,6 +3,7 @@ import menu from "/src/assets/icons8-menu-64.png";
 import React from "react";
 import { DrawerDefault } from "./Drawer";
 import { Drawer } from "@material-tailwind/react";
+import logo from '/src/assets/logo.png'
 
 export default function Navbar() {
   const [open, setOpen] = React.useState(false);
@@ -11,7 +12,7 @@ export default function Navbar() {
   const closeDrawer = () => setOpen(false);
 
   return (
-    <div className="flex items-center justify-between p-4 z-[100] w-full absolute bg-black shadow-sm shadow-blue-gray-900">
+    <div className="flex items-center justify-between p-5 z-[100] w-full absolute bg-black shadow-sm shadow-blue-gray-900">
       {/* Left Section */}
       <div className="flex items-center gap-2">
         <img
@@ -37,7 +38,7 @@ export default function Navbar() {
         <button className="bg-pink-600 text-sm text-white px-2 py-1 rounded-md hover:bg-pink-700 sm:text-base">
           Log In
         </button>
-        <Avatar src="src/assets/logo.png" className="h-8 w-8 sm:h-10 sm:w-10" />
+        <Avatar src={logo} className="h-8 w-8 sm:h-10 sm:w-10" />
       </div>
     </div>
   );
