@@ -3,7 +3,7 @@ import menu from "/src/assets/icons8-menu-64.png";
 import React from "react";
 import { DrawerDefault } from "./Drawer";
 import { Drawer } from "@material-tailwind/react";
-import logo from '/src/assets/logo.png'
+import logo from "/src/assets/logo.png";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
@@ -13,7 +13,7 @@ export default function Navbar() {
   const closeDrawer = () => setOpen(false);
 
   return (
-    <div className="flex items-center justify-between p-5 z-[100] w-full absolute bg-black shadow-sm shadow-blue-gray-900">
+    <div className="fixed flex items-center justify-between p-4 z-[100] w-full  bg-black shadow-sm shadow-blue-gray-900">
       {/* Left Section */}
       <div className="flex items-center gap-2">
         <img
@@ -27,14 +27,17 @@ export default function Navbar() {
           open={open}
           onClose={closeDrawer}
         >
-          <DrawerDefault closeDrawer={closeDrawer}/>
+          <DrawerDefault closeDrawer={closeDrawer} />
         </Drawer>
         <Link to={"/"}>
-        <h1 className="text-pink-600 text-xm sm:text-2xl font-bold cursor-pointer">
-          K-DRAMA ZONE
-        </h1>
+          <h1 className="text-pink-600 text-xm sm:text-2xl font-bold cursor-pointer">
+            K-DRAMA ZONE
+          </h1>
         </Link>
       </div>
+
+     
+     
 
       {/* Right Section */}
       <div className="flex items-center gap-4">

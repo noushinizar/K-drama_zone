@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import bgimg from "/src/assets/bg_image.jpg";
 import { fetchDramas } from "../redux/DramaSlice";
 import Navbar from "../components/Navbar";
-import Home from "./home";
-import Drama from "./Drama";
 
 export function GenrePage() {
   const dispatch = useDispatch();
@@ -14,6 +12,9 @@ export function GenrePage() {
   const { list: dramas, genreFilter, loading } = useSelector(
     (state) => state.dramas
   );
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredDramas, setFilteredDramas] = useState([]);
 
   const genres = [
     { id: 35, name: "Comedy" },
@@ -31,59 +32,81 @@ export function GenrePage() {
 
   useEffect(() => {
     if (genreFilter) {
-      dispatch(fetchDramas(genreFilter)); // Fetch dramas for the selected genre
+      dispatch(fetchDramas(genreFilter));
     }
   }, [dispatch, genreFilter]);
 
+  useEffect(() => {
+    console.log("Dramas from Redux store:", dramas); // Debug log
+    const results = dramas.filter((drama) =>
+      (drama.name || drama.title || "").toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    console.log("Filtered Dramas:", results); // Debug log
+    setFilteredDramas(results);
+  }, [dramas, searchQuery]);
+
+  const handleSearchChange = (event) => {
+    console.log("Search Query:", event.target.value); // Debug log
+    setSearchQuery(event.target.value);
+  };
+
   const handleDramaClick = (id) => {
-    navigate(`/drama/${id}`); // Navigate to drama details page
+    navigate(`/drama/${id}`);
   };
 
   return (
     <>
-     <Navbar />
-    <div
-      className="p-4 overflow-x-hidden h-full"
-      style={{ backgroundImage: `url(${bgimg})` }}
-    >
-      <div className="bg-black/60 fixed top-0 left-0 w-full h-screen"></div>
-      <Typography variant="h4" color="white" className="mb-4 mt-20">
-        {`${selectedGenre} Dramas`}
-      </Typography>
+      <Navbar />
+      <div
+        className="p-4 overflow-x-hidden h-full fixed "
+        style={{ backgroundImage: `url(${bgimg})` }}
+      >
+        {/* <div className="bg-black/60 fixed top-0 left-0 w-full h-screen"></div> */}
+        <Typography variant="h4" color="white" className="mb-4 mt-20">
+          {`${selectedGenre} Dramas`}
+        </Typography>
 
-      {/* Dramas Grid */}
-      <div className="mt-4">
-        {loading ? (
-          <p className="text-gray-400">
-            Loading {selectedGenre.toLowerCase()} dramas...
-          </p>
-        ) : dramas.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-7 gap-4">
-            {dramas.map((drama) => (
-              <div
-                key={drama.id}
-                onClick={() => handleDramaClick(drama.id)}
-                className="relative group cursor-pointer"
-              >
-                <img
-                  src={`https://image.tmdb.org/t/p/w400${drama.poster_path}`}
-                  alt={drama.name || drama.title}
-                  className="rounded-lg w-full h-full object-cover group-hover:opacity-75"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 flex items-center justify-center rounded-lg transition duration-300">
-                  <p className="text-white font-bold text-center">
-                    {drama.name || drama.title}
-                  </p>
+        <div className="sm:flex flex-1 justify-center mx-4">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            placeholder="Search K-Dramas"
+            className="w-full max-w-md px-4 py-2 text-sm text-white bg-gray-900 rounded-md shadow-inner focus:outline-none focus:ring-2 focus:ring-pink-600"
+          />
+        </div>
+        
+        <div className="mt-4">
+          {loading ? (
+            <p className="text-gray-400">
+              Loading {selectedGenre.toLowerCase()} dramas...
+            </p>
+          ) : filteredDramas.length > 0 ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-7 gap-4">
+              {filteredDramas.map((drama) => (
+                <div
+                  key={drama.id}
+                  onClick={() => handleDramaClick(drama.id)}
+                  className="relative group cursor-pointer"
+                >
+                  <img
+                    src={`https://image.tmdb.org/t/p/w400${drama.poster_path}`}
+                    alt={drama.name || drama.title}
+                    className="rounded-lg w-full h-full object-cover group-hover:opacity-75"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 flex items-center justify-center rounded-lg transition duration-300">
+                    <p className="text-white font-bold text-center">
+                      {drama.name || drama.title}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-           <Drama />
-        //   <img className="h-full w-full object-fill" src={bgimg} alt="" />
-        )}
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-400">No dramas found for "{searchQuery}"</p>
+          )}
+        </div>
       </div>
-    </div>
     </>
   );
 }
