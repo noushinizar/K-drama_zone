@@ -1,6 +1,5 @@
 import React from "react";
-import { Button, IconButton } from "@material-tailwind/react";
-import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
+import { IconButton } from "@material-tailwind/react";
 
 export function CircularPagination({ active, totalPages, onChange }) {
   const getItemProps = (index) => ({
@@ -21,31 +20,37 @@ export function CircularPagination({ active, totalPages, onChange }) {
   };
 
   return (
-    <div className="flex items-center gap-4">
-      <Button
-        variant="text"
-        className="flex items-center gap-2 rounded-full bg-gray-600 hover:bg-gray-400"
+    <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+      {/* Previous Button (Hidden on small screens, visible on medium and larger screens) */}
+      <button
         onClick={prev}
         disabled={active === 1}
+        className="hidden sm:flex items-center gap-2 rounded-full bg-gray-600 hover:bg-gray-400 text-sm md:text-base px-3 py-2"
       >
-        <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" /> Previous
-      </Button>
-      <div className="flex items-center gap-2 ">
+        <span>Previous</span>
+      </button>
+
+      {/* Page Numbers */}
+      <div className="flex flex-wrap justify-center items-center gap-2">
         {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-          <IconButton key={page} {...getItemProps(page)}>
+          <IconButton
+            key={page}
+            {...getItemProps(page)}
+            className="text-sm md:text-base p-2 sm:p-3 text-gray-800 "
+          >
             {page}
           </IconButton>
         ))}
       </div>
-      <Button
-        variant="text"
-        className="flex items-center gap-2 rounded-full  bg-gray-600 hover:bg-gray-400"
+
+      {/* Next Button (Hidden on small screens, visible on medium and larger screens) */}
+      <button
         onClick={next}
         disabled={active === totalPages}
+        className="hidden sm:flex items-center gap-2 rounded-full bg-gray-600 hover:bg-gray-400 text-sm md:text-base px-3 py-2"
       >
-        Next
-        <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
-      </Button>
+        <span>Next</span>
+      </button>
     </div>
   );
 }
