@@ -20,6 +20,7 @@ export function DrawerDefault({ closeDrawer }) {
     { id: 10768, name: "War & Politics" },
     { id: 36, name: "Historical" },
     { id: 10751, name: "Family & Revenge" },
+    
   ];
 
   const handleGenreSelect = (id) => {

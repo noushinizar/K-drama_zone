@@ -8,22 +8,29 @@ export const fetchDramas = createAsyncThunk(
   "dramas/fetchDramas",
   async (genreId = null) => {
     const endpoint = "https://api.themoviedb.org/3/discover/tv";
-    try {
-      const params = {
-        api_key: API_KEY,
-        language: "en-US",
-        sort_by: "popularity.desc",
-        with_original_language: "ko",
-        page: 1,
-      };
+    const totalPages = 5; // Fetch 5 pages of results (100 dramas)
+    const allResults = [];
 
-      if (genreId) {
-        params.with_genres = genreId;
+    try {
+      for (let page = 1; page <= totalPages; page++) {
+        const params = {
+          api_key: API_KEY,
+          language: "en-US",
+          sort_by: "popularity.desc",
+          with_original_language: "ko",
+          page, // Specify the current page
+        };
+
+        if (genreId) {
+          params.with_genres = genreId;
+        }
+
+        const response = await axios.get(endpoint, { params });
+        allResults.push(...response.data.results); // Combine results
       }
 
-      const response = await axios.get(endpoint, { params });
-      console.log("Fetched Dramas:", response.data.results);
-      return response.data.results;
+      console.log("Fetched Multiple Pages of Dramas:", allResults);
+      return allResults;
     } catch (error) {
       console.error("Error fetching dramas:", error);
       throw error;

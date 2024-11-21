@@ -13,7 +13,20 @@ function DramaDetails() {
   }, [dispatch, id]);
 
   if (loading)
-    return <p className="text-center text-lg text-gray-500">Loading...</p>;
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-black text-white relative">
+        <div className="relative">
+          {/* Outer Pulsating Ring */}
+          <div className="absolute inset-0 rounded-full border-4 border-pink-600 border-opacity-50 animate-ping"></div>
+          {/* Inner Spinner */}
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-pink-600 border-solid"></div>
+        </div>
+        {/* Loading Text */}
+        <div className="absolute bottom-16 text-center">
+          <p className="text-lg font-bold animate-pulse">Loading, please wait...</p>
+        </div>
+      </div>
+    );
 
   const truncateString = (str, num) => {
     if (str?.length > num) {
