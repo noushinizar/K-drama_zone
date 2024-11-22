@@ -81,9 +81,21 @@ export function GenrePage() {
 
         <div className="mt-4">
           {loading ? (
-            <p className="text-gray-400">
-              Loading {selectedGenre.toLowerCase()} dramas...
-            </p>
+             <div className="flex items-center justify-center h-[100vh] w-[100vw] bg-transparent text-white relative">
+             <div className="relative">
+               {/* Outer Pulsating Ring */}
+               <div className="absolute inset-0 rounded-full border-4 border-pink-600 border-opacity-50 animate-ping"></div>
+               {/* Inner Spinner */}
+               <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-pink-600 border-solid"></div>
+             </div>
+             {/* Loading Text */}
+             {/* <div className="absolute bottom-24 text-center">
+               <p className="text-lg font-bold animate-pulse"> Loading {selectedGenre.toLowerCase()} dramas...</p>
+             </div> */}
+           </div>
+            // <p className="text-gray-400 text-center h-[100vh] w-[100vw]">
+            //   Loading {selectedGenre.toLowerCase()} dramas...
+            // </p>
           ) : paginatedDramas.length > 0 ? (
             <div>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-7 gap-4">
@@ -117,7 +129,7 @@ export function GenrePage() {
               </div>
             </div>
           ) : (
-            <p className="text-gray-400">No dramas found for "{searchQuery}"</p>
+            <p className="pt-10 text-gray-300 text-center h-[100vh] w-[100vw]">No dramas found for "{searchQuery}"</p>
           )}
         </div>
       </div>

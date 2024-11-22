@@ -31,7 +31,7 @@ export function Drama() {
       {/* Trending Dramas Horizontal Scroll */}
       <div className="mt-28">
         {loading ? (
-          <p className="text-gray-400">Loading trending dramas...</p>
+          <p className="text-gray-400 h-[100vh] w-[100vw]">Loading trending dramas...</p>
         ) : dramas.length > 0 ? (
           <div className="flex overflow-x-scroll gap-5 scrollbar-hide">
             {dramas.map((drama) => (
@@ -54,7 +54,7 @@ export function Drama() {
             ))}
           </div>
         ) : (
-          <p className="text-gray-400">No trending dramas available.</p>
+          <p className="text-gray-400 h-[100vh] w-[100vw]">No trending dramas available.</p>
         )}
       </div>
     </div>

@@ -36,7 +36,7 @@ export function CircularPagination({ active, totalPages, onChange }) {
           <IconButton
             key={page}
             {...getItemProps(page)}
-            className="text-sm md:text-base p-2 sm:p-3 text-gray-800 "
+            className="text-sm md:text-base p-2 sm:p-3 text-gray-500 "
           >
             {page}
           </IconButton>
