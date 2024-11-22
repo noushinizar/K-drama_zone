@@ -31,7 +31,18 @@ export function Drama() {
       {/* Trending Dramas Horizontal Scroll */}
       <div className="mt-28">
         {loading ? (
-          <p className="text-gray-400 h-[100vh] w-[100vw]">Loading trending dramas...</p>
+           <div className="flex items-center justify-center h-[100vh] w-[100vw] bg-transparent text-white relative">
+           <div className="relative">
+             {/* Outer Pulsating Ring */}
+             <div className="absolute inset-0 rounded-full border-4 border-pink-600 border-opacity-50 animate-ping"></div>
+             {/* Inner Spinner */}
+             <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-pink-600 border-solid"></div>
+           </div>
+           {/* Loading Text */}
+           {/* <div className="absolute bottom-24 text-center">
+             <p className="text-lg font-bold animate-pulse"> Loading {selectedGenre.toLowerCase()} dramas...</p>
+           </div> */}
+         </div>
         ) : dramas.length > 0 ? (
           <div className="flex overflow-x-scroll gap-5 scrollbar-hide">
             {dramas.map((drama) => (
